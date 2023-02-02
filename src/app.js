@@ -2,7 +2,7 @@ const http = require('http');
 const getUsers = require('./modules/users')
 
 
-const hostName = "https://127.0.0.1";
+const hostName = "http://127.0.0.1";
 const port = process.env.PORT || 3003;
 
 const server = http.createServer((request, response) => {
@@ -11,7 +11,7 @@ const server = http.createServer((request, response) => {
   const userName = url.searchParams.get("name");
 
   if (userName) {
-    response.status = 200;
+    response.statusCode = 200;
     response.statusMessage = "OK";
     response.header = "Content-Type: text/plain";
     response.write(`Hello ${userName}`);
@@ -21,7 +21,7 @@ const server = http.createServer((request, response) => {
 
   switch (request.url) {
     case "/?users":
-      response.status = 200;
+      response.statusCode = 200;
       response.statusMessage = "OK";
       response.header = "Content-Type: application/json";
       response.write(getUsers());
@@ -29,7 +29,7 @@ const server = http.createServer((request, response) => {
       break;
 
     case "/?name":
-      response.status = 400;
+      response.statusCode = 400;
       response.statusMessage = "Bad Request";
       response.header = "Content-Type: text/plain";
       response.write(`Enter a name`);
@@ -37,7 +37,7 @@ const server = http.createServer((request, response) => {
       break;
 
     case "/":
-      response.status = 200;
+      response.statusCode = 200;
       response.statusMessage = "OK";
       response.header = "Content-Type: text/plain";
       response.write(`Hello world`);
@@ -45,7 +45,7 @@ const server = http.createServer((request, response) => {
       break;
 
     default:
-      response.status = 500;
+      response.statusCode = 500;
       response.statusMessage = "Internal Server Error";
       response.header = "Content-Type: text/plain";
       response.write("wrong");
