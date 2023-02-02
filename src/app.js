@@ -20,6 +20,9 @@ const server = http.createServer((request, response) => {
   }
 
   switch (request.url) {
+    case ('/favicon.ico'):
+      response.writeHead(200)
+      
     case "/?users":
       response.statusCode = 200;
       response.statusMessage = "OK";
